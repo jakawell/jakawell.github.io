@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Split/Infinity</title>
+    <script>
+      const locales = [
+        ['Abkhazian', 'ab'],
+        ['Afar', 'aa'],
+        ['Afrikaans', 'af'],
+        ['Akan', 'ak'],
+        ['Albanian', 'sq'],
+        ['Amharic', 'am'],
+        ['Arabic', 'ar'],
+        ['Aragonese', 'an'],
+        ['Argentina', 'es-ar'],
+        ['Armenian', 'hy'],
+        ['Assamese', 'as'],
+        ['Avaric', 'av'],
+        ['Avestan', 'ae'],
+        ['Aymara', 'ay'],
+        ['Azerbaijani', 'az'],
+        ['Bambara', 'bm'],
+        ['Bashkir', 'ba'],
+        ['Basque', 'eu'],
+        ['Belarusian', 'be'],
+        ['Bengali (Bangla)', 'bn'],
+        ['Bihari', 'bh'],
+        ['Bislama', 'bi'],
+        ['Bosnian', 'bs'],
+        ['Breton', 'br'],
+        ['Bulgarian', 'bg'],
+        ['Burmese', 'my'],
+        ['Catalan', 'ca'],
+        ['Chamorro', 'ch'],
+        ['Chechen', 'ce'],
+        ['Chichewa, Chewa, Nyanja', 'ny'],
+        ['Chinese', 'zh'],
+        ['Chinese (Simplified)', 'zh-Hans'],
+        ['Chinese (Traditional)', 'zh-Hant'],
+        ['Chuvash', 'cv'],
+        ['Cornish', 'kw'],
+        ['Corsican', 'co'],
+        ['Cree', 'cr'],
+        ['Croatian', 'hr'],
+        ['Czech', 'cs'],
+        ['Danish', 'da'],
+        ['Divehi, Dhivehi, Maldivian', 'dv'],
+        ['Dutch', 'nl'],
+        ['Dzongkha', 'dz'],
+        ['English', 'en'],
+        ['Esperanto', 'eo'],
+        ['Estonian', 'et'],
+        ['Ewe', 'ee'],
+        ['Faroese', 'fo'],
+        ['Fijian', 'fj'],
+        ['Finnish', 'fi'],
+        ['French', 'fr'],
+        ['Fula, Fulah, Pulaar, Pular', 'ff'],
+        ['Galician', 'gl'],
+        ['Gaelic (Scottish)', 'gd'],
+        ['Gaelic (Manx)', 'gv'],
+        ['Georgian', 'ka'],
+        ['German', 'de'],
+        ['Greek', 'el'],
+        ['Greenlandic', 'kl'],
+        ['Guarani', 'gn'],
+        ['Gujarati', 'gu'],
+        ['Haitian Creole', 'ht'],
+        ['Hausa', 'ha'],
+        ['Hebrew', 'he'],
+        ['Herero', 'hz'],
+        ['Hindi', 'hi'],
+        ['Hiri Motu', 'ho'],
+        ['Hungarian', 'hu'],
+        ['Icelandic', 'is'],
+        ['Ido', 'io'],
+        ['Igbo', 'ig'],
+        ['Indonesian', 'id, in'],
+        ['Interlingua', 'ia'],
+        ['Interlingue', 'ie'],
+        ['Inuktitut', 'iu'],
+        ['Inupiak', 'ik'],
+        ['Irish', 'ga'],
+        ['Italian', 'it'],
+        ['Japanese', 'ja'],
+        ['Javanese', 'jv'],
+        ['Kalaallisut, Greenlandic', 'kl'],
+        ['Kannada', 'kn'],
+        ['Kanuri', 'kr'],
+        ['Kashmiri', 'ks'],
+        ['Kazakh', 'kk'],
+        ['Khmer', 'km'],
+        ['Kikuyu', 'ki'],
+        ['Kinyarwanda (Rwanda)', 'rw'],
+        ['Kirundi', 'rn'],
+        ['Kyrgyz', 'ky'],
+        ['Komi', 'kv'],
+        ['Kongo', 'kg'],
+        ['Korean', 'ko'],
+        ['Kurdish', 'ku'],
+        ['Kwanyama', 'kj'],
+        ['Lao', 'lo'],
+        ['Latin', 'la'],
+        ['Latvian (Lettish)', 'lv'],
+        ['Limburgish ( Limburger)', 'li'],
+        ['Lingala', 'ln'],
+        ['Lithuanian', 'lt'],
+        ['Luga-Katanga', 'lu'],
+        ['Luganda, Ganda', 'lg'],
+        ['Luxembourgish', 'lb'],
+        ['Manx', 'gv'],
+        ['Macedonian', 'mk'],
+        ['Malagasy', 'mg'],
+        ['Malay', 'ms'],
+        ['Malayalam', 'ml'],
+        ['Maltese', 'mt'],
+        ['Maori', 'mi'],
+        ['Marathi', 'mr'],
+        ['Marshallese', 'mh'],
+        ['Moldavian', 'mo'],
+        ['Mongolian', 'mn'],
+        ['Nauru', 'na'],
+        ['Navajo', 'nv'],
+        ['Ndonga', 'ng'],
+        ['Northern Ndebele', 'nd'],
+        ['Nepali', 'ne'],
+        ['Norwegian', 'no'],
+        ['Norwegian bokmål', 'nb'],
+        ['Norwegian nynorsk', 'nn'],
+        ['Nuosu', 'ii'],
+        ['Occitan', 'oc'],
+        ['Ojibwe', 'oj'],
+        ['Old Church Slavonic, Old Bulgarian', 'cu'],
+        ['Oriya', 'or'],
+        ['Oromo (Afaan Oromo)', 'om'],
+        ['Ossetian', 'os'],
+        ['Pāli', 'pi'],
+        ['Pashto, Pushto', 'ps'],
+        ['Persian (Farsi)', 'fa'],
+        ['Polish', 'pl'],
+        ['Portuguese', 'pt'],
+        ['Punjabi (Eastern)', 'pa'],
+        ['Quechua', 'qu'],
+        ['Romansh', 'rm'],
+        ['Romanian', 'ro'],
+        ['Russian', 'ru'],
+        ['Sami', 'se'],
+        ['Samoan', 'sm'],
+        ['Sango', 'sg'],
+        ['Sanskrit', 'sa'],
+        ['Serbian', 'sr'],
+        ['Serbo-Croatian', 'sh'],
+        ['Sesotho', 'st'],
+        ['Setswana', 'tn'],
+        ['Shona', 'sn'],
+        ['Sichuan Yi', 'ii'],
+        ['Sindhi', 'sd'],
+        ['Sinhalese', 'si'],
+        ['Siswati', 'ss'],
+        ['Slovak', 'sk'],
+        ['Slovenian', 'sl'],
+        ['Somali', 'so'],
+        ['Southern Ndebele', 'nr'],
+        ['Spanish', 'es'],
+        ['Sundanese', 'su'],
+        ['Swahili (Kiswahili)', 'sw'],
+        ['Swati', 'ss'],
+        ['Swedish', 'sv'],
+        ['Tagalog', 'tl'],
+        ['Tahitian', 'ty'],
+        ['Tajik', 'tg'],
+        ['Tamil', 'ta'],
+        ['Tatar', 'tt'],
+        ['Telugu', 'te'],
+        ['Thai', 'th'],
+        ['Tibetan', 'bo'],
+        ['Tigrinya', 'ti'],
+        ['Tonga', 'to'],
+        ['Tsonga', 'ts'],
+        ['Turkish', 'tr'],
+        ['Turkmen', 'tk'],
+        ['Twi', 'tw'],
+        ['Uyghur', 'ug'],
+        ['Ukrainian', 'uk'],
+        ['Urdu', 'ur'],
+        ['Uzbek', 'uz'],
+        ['Venda', 've'],
+        ['Vietnamese', 'vi'],
+        ['Volapük', 'vo'],
+        ['Wallon', 'wa'],
+        ['Welsh', 'cy'],
+        ['Wolof', 'wo'],
+        ['Western Frisian', 'fy'],
+        ['Xhosa', 'xh'],
+        ['Yiddish', 'yi', 'ji'],
+        ['Yoruba', 'yo'],
+        ['Zhuang, Chuang', 'za'],
+        ['Zulu', 'zu'],
+      ];
+      function loadLocales() {
+        const selector = document.getElementById('locale-selector');
+        locales.map((locale) => {
+          const option = document.createElement('option');
+          option.setAttribute('value', locale[1]);
+          option.appendChild(document.createTextNode(locale[0]));
+          selector.appendChild(option);
+        });
+        selector.value = 'en';
+      }
+    </script>
+    <script>
+      function updateSplits() {
+        const source = document.getElementById('source-text').value;
+        const maxPostLength = parseInt(document.querySelector('input[name=post-length]:checked').value)
+          || parseInt(document.getElementById('other-length-value').value)
+          || 100;
+        const locale = document.getElementById('locale-selector').value;
+
+        function segmentSource(subSource, granularity) {
+          const segmenter = new Intl.Segmenter(locale, { granularity });
+          const segments = Array.from(segmenter.segment(subSource));
+          return segments.reduce((acc, cur) => {
+            const segment = cur.segment;
+            if (acc[acc.length - 1].length + segment.length < maxPostLength) {
+              acc[acc.length - 1] += `${segment}`;
+            } else if (segment.length <= maxPostLength) {
+              acc.push(segment);
+            } else {
+              const subSegments = segmentSource(segment, granularity === 'sentence' ? 'word' : 'grapheme');
+              acc.push(...subSegments);
+            }
+            return acc;
+          }, ['']);
+        }
+
+        const posts = segmentSource(source, 'sentence');
+
+        // clear old posts
+        document.querySelectorAll('#post-cards > div').forEach((element, index) => {
+          if (index > 0) { // skip the template post at index 0
+            element.parentNode.removeChild(element);
+          }
+        });
+
+        // add posts
+        const templatePostCard = document.getElementById('template-post-card');
+        const templatePost = document.getElementById('template-post');
+        const templateCopy = document.getElementById('template-copy');
+        posts.forEach((p, index) => {
+          const postNumber = index + 1;
+          const newPostCard = templatePostCard.cloneNode(true);
+          newPostCard.id = `post${postNumber}-card`;
+          newPostCard.style = 'display: block;'
+          while (newPostCard.firstChild) {
+            newPostCard.removeChild(newPostCard.lastChild);
+          }
+          const newPost = templatePost.cloneNode(true);
+          newPost.id = `post${postNumber}`;
+          newPost.value = p;
+          const newPostCopy = templateCopy.cloneNode(true);
+          newPostCopy.id = `post${postNumber}-copy`;
+          newPostCopy.onclick = () => copyPost(postNumber);
+          newPostCard.appendChild(newPost);
+          newPostCard.appendChild(newPostCopy);
+          templatePostCard.parentNode.appendChild(newPostCard);
+        });
+      }
+    </script>
+    <script>
+      function copyPost(index) {
+        const post = document.getElementById("post" + index);
+        post.select();
+        post.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(post.value);
+      }
+    </script>
+    <script>
+      window.onload = () => {
+        loadLocales();
+        updateSplits();
+      };
+    </script>
+    <style>
+      body {
+        background-color: color-mix(in srgb, Canvas, CanvasText 2.5%);
+        color: color-mix(in srgb, CanvasText, Canvas 15%);
+        color-scheme: light dark;
+        font-family: Verdana, sans-serif;
+      }
+      label,input,textarea,select{
+        display:flex;
+        flex-direction:column;
+        width: 100%;
+      }
+      textarea {
+        margin-top: 12px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      input[type="radio"],input[type="number"],select,.form-block {
+        display: inline-block;
+        width: auto;
+        margin-top: 8px;
+      }
+      label {
+        margin-top: 12px;
+      }
+      .center {
+        margin: auto;
+        width: 50vw;
+      }
+      .card {
+        margin: 12px 0;
+        box-shadow: 0 4px 8px 0 color-mix(in srgb, Canvas, CanvasText 18%);
+        background-color: color-mix(in srgb, Canvas, CanvasText 7.5%);;
+        transition: 0.3s;
+        padding: 8px 16px;
+      }
+      .card:hover {
+        box-shadow: 0 8px 16px 0 color-mix(in srgb, Canvas 100%, CanvasText 22%);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="center">
+        <h1>Split/Infinity</h1>
+        <form>
+          <label>Post length:</label>
+          <label class="form-block">
+            <input type="radio" id="mastodon-length" name="post-length" value="500" onclick="updateSplits()"> Mastodon/Threads (500)
+          </label><br />
+          <label class="form-block">
+            <input type="radio" id="bluesky-length" name="post-length" value="300" onclick="updateSplits()"> BlueSky (300)
+          </label><br />
+          <label class="form-block">
+            <input type="radio" id="twitter-length" name="post-length" value="280" onclick="updateSplits()"> X/Twitter (280)
+          </label><br />
+          <label class="form-block">
+            <input type="radio" id="other-length" name="post-length" value="0" onclick="updateSplits()"> Other
+          </label>
+          <input type="number" id="other-length-value" min="1" value="400" onchange="updateSplits()"><br />
+          <label for="locale" class="form-block">Locale:</label>
+          <select id="locale-selector" onload="loadLocales()"><br />
+          <label for="source-text">Source text:</label>
+          <textarea
+            id="source-text" name="source-text" rows="4" oninput="updateSplits()"
+          >Paste your long text here to be split up...</textarea>
+        </form>
+
+        <div id="post-cards">
+          <div class="card" id="template-post-card" style="display: none;">
+            <input
+              id="template-post"
+              type="text" 
+              value=""
+              readonly
+            >
+            <button id="template-copy" onclick="copyPost(0)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
